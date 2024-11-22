@@ -9,3 +9,4 @@ tasks:
 ports:
   - port: 3000
     onOpen: open-preview # Open the app in the Gitpod preview browser automatically
+    visibility: public   # Make the port publicly accessible
