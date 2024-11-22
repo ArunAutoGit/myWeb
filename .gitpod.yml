@@ -11,7 +11,3 @@ ports:
     onOpen: open-preview # Open the app in the Gitpod preview browser automatically
     visibility: public   # Make the port publicly accessible
 
-# Cleanup tasks to run when the workspace stops
-onStop:
-  - echo "Stopping http-server..." # Log the cleanup action
-  - kill $(lsof -t -i:3000) || echo "Port 3000 is already closed." # Kill the process using port 3000
