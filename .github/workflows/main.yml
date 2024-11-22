@@ -1,10 +1,1 @@
-tasks:
-  - name: Install and Start http-server
-    init: npm install -g http-server # Install http-server globally
-    command: http-server . -p 3000 # Start the server on port 3000
-
-# Ports to expose
-ports:
-  - port: 3000
-    onOpen: open-preview # Open the app in the Gitpod preview browser automatically
 
