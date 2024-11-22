@@ -1,32 +1,11 @@
 # Gitpod configuration file
 
-# Specify a Dockerfile if needed for a custom environment
-image:
-  file: .gitpod.Dockerfile
-
-# List of tasks to execute on workspace start
+# Tasks to execute during workspace initialization
 tasks:
-  - name: Install and start server
-    init: npm install -g http-server # Install http-server globally
+  - init: npm install -g http-server # Install http-server globally
     command: http-server . -p 3000  # Start the server on port 3000
 
-# Ports to expose
+# Ports to expose and their behavior
 ports:
   - port: 3000
     onOpen: open-preview # Open the app in the Gitpod preview browser automatically
-
-# Environment variables (optional)
-variables:
-  NODE_ENV: development
-
-# Prebuild configuration to speed up initialization (optional)
-prebuilds:
-  master: true
-  branches: true
-  pullRequests: true
-
-# VS Code extensions (optional)
-vscode:
-  extensions:
-    - dbaeumer.vscode-eslint
-    - esbenp.prettier-vscode
