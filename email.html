@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email</title>
+  <link rel="stylesheet" href="stylesdashboard.css"> <!-- Link to your CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh; /* Ensure the body takes full height */
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    header button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    nav.sidebar {
+      width: 200px;
+      background-color: #f4f4f4;
+      height: calc(100vh - 60px); /* Full height minus the header height */
+      position: fixed;
+      top: 60px;
+      left: 0;
+      margin-top: 60px; /* Account for header height */
+    }
+
+    nav.sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav.sidebar li {
+      padding: 10px 20px;
+    }
+
+    nav.sidebar li a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+      transition: background 0.3s;
+    }
+
+    nav.sidebar li a:hover {
+      background-color: #ddd;
+    }
+
+    main {
+      margin-left: 200px; /* Adjust for sidebar width */
+      padding: 80px 20px 20px; /* Account for header height */
+      width: 100%;
+      box-sizing: border-box;
+      flex-grow: 1; /* Make sure main section grows to fill available space */
+    }
+
+    .container {
+      width: 75%; /* Increased container width */
+      max-width: 900px; /* Max width for the form */
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      min-height: 550px; /* Increased height of the container */
+    }
+
+    .container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form label {
+      font-weight: bold;
+    }
+
+    form input, form textarea, form button {
+      width: 100%; /* Ensure input fields stretch to container width */
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Ensure the form does not exceed the screen width */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%; /* Adjust container width on small screens */
+      }
+
+      nav.sidebar {
+        width: 100%;
+        position: relative;
+      }
+
+      main {
+        margin-left: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo">
+    <button onclick="window.location.href='dashboard.html';">Back to Dashboard</button>
+  </header>
+  <nav class="sidebar">
+    <ul>
+      <li><a href="workplace.html">Workplace</a></li>
+      <li><a href="record.html">Record</a></li>
+      <li><a href="help.html">Help</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+    </ul>
+  </nav>
+  <main>
+    <div class="container">
+      <h1>Create and Send Email</h1>
+      <form id="emailForm" onsubmit="sendEmail(event)">
+        <label for="to">To:</label>
+        <input type="email" id="to" name="to" placeholder="Recipient's email address" required>
+
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" placeholder="Email subject" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit">Send Email</button>
+      </form>
+    </div>
+  </main>
+  <script>
+    function sendEmail(event) {
+      event.preventDefault();
+
+      const to = document.getElementById('to').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+const emailParams = {
+        to_email: to,
+        subject: subject,
+        message: message
+      };
+
+      // Send email using EmailJS
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
+        .then(function(response) {
+          console.log("Email sent successfully", response);
+          alert("Email sent successfully!");
+        }, function(error) {
+          console.log("Failed to send email", error);
+          alert("Failed to send email. Please try again.");
+        });
+    }
+  </script>
+</body>
+</html>
